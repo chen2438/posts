@@ -1,7 +1,7 @@
 ## 部署 MySQL
 
 ```bash
-sudo docker run -d  -p 3306:3306 \
+sudo docker run -itd  -p 3306:3306 \
  --restart=always  --user=root --privileged=true \
  -e MYSQL_ROOT_PASSWORD=123456  -e MYSQL_DATABASE=wordpress\
  -v /opt/docker/mysql:/var/lib/mysql \
@@ -23,7 +23,7 @@ sudo docker run -d  -p 3306:3306 \
 ## 部署 WordPress
 
 ```bash
-sudo docker run -d  -p 80:80 -p 443:443 \
+sudo docker run -itd  -p 80:80 -p 443:443 \
   --restart=always  --user=root --privileged=true \
   --link mysql:mysql \
   -e WORDPRESS_DB_HOST=mysql:3306 -e WORDPRESS_DB_USER=root \
