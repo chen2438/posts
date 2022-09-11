@@ -1,9 +1,9 @@
-### 功能
+## 功能
 
 1. 分屏。
 2. 允许断开Terminal连接后，继续运行进程。
 
-### 结构
+## 结构
 
 一个 tmux 可以包含多个 session ，一个 session 可以包含多个 window，一个 window 可以包含多个 pane。
 
@@ -25,7 +25,7 @@ tmux:
     ...
 ```
 
-### 配置文件
+## 配置文件
 
 注意使用时如果报错，需升级 tmux 至 3.0 版本。
 
@@ -116,7 +116,7 @@ bind 'c' new-window -c "#{pane_current_path}"
 # vim: ft=conf
 ```
 
-### 操作
+## 操作
 
 如果不配置 `.tmux.conf`， 下文中 `Ctrl + a` 改为 `Ctrl + b`，有些操作可能不适用。
 
@@ -147,3 +147,7 @@ bind 'c' new-window -c "#{pane_current_path}"
         (2) 用鼠标选中文本，被选中的文本会被自动复制到tmux的剪贴板
         (3) 按下Ctrl + a后松开手指，然后按]，会将剪贴板中的内容粘贴到光标处
 ```
+
+## 参考链接
+
+https://www.acwing.com/activity/content/introduction/57/
