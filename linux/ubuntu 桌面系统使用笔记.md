@@ -54,6 +54,6 @@
 
 在输入新密码时留空
 
-# 创建文件快捷方式
+### 创建文件快捷方式
 
 `ln -s /home/chen/Github/posts /home/chen/Desktop/posts`
