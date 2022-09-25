@@ -54,6 +54,10 @@
 
 在输入新密码时留空
 
-### 创建文件快捷方式
+### 创建目录快捷方式
 
 `ln -s /home/chen/Github/posts /home/chen/Desktop/posts`
+
+### 开机自启动蓝牙
+
+`sudo systemctl enable bluetooth`
