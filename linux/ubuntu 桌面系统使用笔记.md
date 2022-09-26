@@ -61,3 +61,14 @@
 ### 开机自启动蓝牙
 
 `sudo systemctl enable bluetooth`
+
+### 查看CPU温度
+
+安装psensor
+
+`sudo apt install psensor`
+
+### 查看CPU架构
+
+`lscpu`
+
