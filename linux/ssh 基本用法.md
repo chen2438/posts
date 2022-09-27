@@ -47,7 +47,7 @@ Host key verification failed.
 
 ### 配置免密登录
 
-**配置别名**
+#### 配置别名
 
 编辑 `config`
 
@@ -71,16 +71,12 @@ Host myserver2
 
 登录即 `ssh myserver1`
 
-**创建密钥**
-
-Linux 本地主机可以通过 `ssh-copy-id myserver` 一键添加公钥。
-
-Windows 本地主机如下操作
+#### 创建密钥
 
 `ssh-keygen`，然后一直回车（如果已存在密钥，则输入 y 覆盖）
 
 ```shell
-PS C:\Users\Qwer-laptop\.ssh> ssh-keygen.exe
+PS C:\Users\Qwer-laptop\.ssh> ssh-keygen
 Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\Qwer-laptop/.ssh/id_rsa):
 C:\Users\Qwer-laptop/.ssh/id_rsa already exists.
@@ -90,20 +86,26 @@ Enter same passphrase again:
 Your identification has been saved in C:\Users\Qwer-laptop/.ssh/id_rsa
 Your public key has been saved in C:\Users\Qwer-laptop/.ssh/id_rsa.pub
 The key fingerprint is:
-SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx qwer-laptop@Legion
+SHA256:xxxxxxxxxxxxxxxx马赛克xxxxxxxxxxxxxxxxx qwer-laptop@Legion
 The key's randomart image is:
 +---[RSA 3072]----+
 |xxxxxxxxx        |
 |o+o B +o..       |
 |=.o= E .O        |
-|*xxxxxxxxxx      |
+|*xxxx马赛克xx     |
 |+o    . S        |
-|xx               |
+|xx    马赛克      |
 |xxx    xxxx      |
 |xxxx             |
 |xxxxx            |
 +----[SHA256]-----+
 ```
 
-然后，将本地主机的`~/.ssh/id_rsa.pub`中的内容复制到 `myserver` 中的`~/.ssh/authorized_keys`文件里。
+#### 添加密钥
+
+Linux 本地主机可以通过 `ssh-copy-id myserver` 一键添加公钥。
+
+Windows 本地主机如下操作
+
+将本地主机的`~/.ssh/id_rsa.pub`中的内容复制到 `myserver` 中的`~/.ssh/authorized_keys`文件里。
 
