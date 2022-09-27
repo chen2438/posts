@@ -19,7 +19,7 @@ docker pull wordpress
 
 ## 启动容器
 
-编写 docker-wordpress.yml
+编写 docker-compose.yml
 
 ```yaml
 version: '3.3'
@@ -30,7 +30,7 @@ services:
      ports:
        - "3307:3306"
      volumes:
-       - $PWD/data:/var/lib/mysql
+       - ~/wordpress/mysql:/var/lib/mysql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: 123456
@@ -53,13 +53,13 @@ services:
        WORDPRESS_DB_NAME: wordpress
        WORDPRESS_WPLANG: zh-CN
      volumes:
-       - $PWD/wp-content:/var/www/html/wp-content
+       - ~/wordpress/html:/var/www/html
 ```
 
 运行容器
 
 ```bash
-docker-compose -f docker-wordpress.yml up -d
+docker-compose up -d
 ```
 
 服务器防火墙开放 80 和 443 端口, 浏览器输入域名即可访问 WordPress
