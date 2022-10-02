@@ -33,7 +33,7 @@ git config --global user.email xxx@xxx.com：设置全局邮箱地址，信息�
 git init：将当前目录配置成git仓库，信息记录在隐藏的.git文件夹中
 git add XX：将XX文件添加到暂存区
 git add .：将所有待加入暂存区的文件加入暂存区
-git rm --cached XX：将文件从仓库索引目录中删掉
+git rm --cached XX：删除对文件XX的追踪
 git commit -m "给自己看的备注信息"：将暂存区的内容提交到当前分支
 git status：查看仓库状态
 git diff XX：查看XX文件相对于暂存区修改了哪些内容
@@ -67,6 +67,12 @@ git stash pop：将栈顶存储的修改恢复到当前分支，同时删除栈�
 git stash list：查看栈中所有元素
 ```
 
+## 注意事项
+
+不要误解了 .gitignore 文件的用途，该文件只能作用于 untracked files，也就是那些从来没有被 git 记录过的文件(自添加以后，从未 add 及 commit 过的文件). 如果文件曾经被 git 记录过，那么 .gitignore 就对它们完全无效.
+
 ## 参考链接
 
 https://www.acwing.com/activity/content/introduction/57/
+
+https://zhuanlan.zhihu.com/p/133414092
