@@ -331,6 +331,12 @@ let Tlist_Auto_Open = 1
 (2) 直接删掉该swp文件即可
 ```
 
+### 按 ESC 无法退出时
+
+Ctrl + C 强制进入命令模式
+
+Ctrl + [ 进入命令模式
+
 ## 参考链接
 
 https://www.acwing.com/activity/content/introduction/57/
