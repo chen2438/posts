@@ -109,3 +109,24 @@ Windows 本地主机如下操作
 
 将本地主机的`~/.ssh/id_rsa.pub`中的内容复制到 `myserver` 中的`~/.ssh/authorized_keys`文件里。
 
+### ubuntu root 登陆
+
+先用正常用户登陆, 进入超级用户模式
+
+`sudo -i`
+
+设置 root 密码
+
+`passwd`
+
+修改 sshd 配置文件
+
+```bash
+#PermitRootLogin prohibit-password
+```
+
+修改为
+
+```bash
+PermitRootLogin yes
+```
