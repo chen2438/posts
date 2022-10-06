@@ -25,7 +25,7 @@ sh get-docker.sh
 安装 docker-compose
 
 ```bash
-sudo apt install docker-compose
+apt install docker-compose
 ```
 
 新建 `zstu-api` 目录, 编写 `docker-compose.yml`
@@ -116,3 +116,5 @@ Ctrl + P 然后 Ctrl + Q 挂起容器, 服务将持续运行
 - 更换linux发行版, 减小镜像大小
 - 构建时更新 git 仓库
 - latest 镜像版本号
+- [安全性]取消 zstu-api 特权模式
+- [安全性]使用自定义网桥, 取消共享宿主机网络
