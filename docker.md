@@ -6,6 +6,7 @@
 
 ```bash
 sudo -i
+cd /root
 ```
 
 更新源, 升级本地文件
@@ -28,11 +29,22 @@ sh get-docker.sh
 apt install docker-compose
 ```
 
-新建 `zstu-api` 目录, 编写 `docker-compose.yml`
+### 运行 api
+
+新建 `zstu-api` 目录并进入
 
 ```bash
 mkdir zstu-api
 cd zstu-api
+```
+
+#### 自动部署
+
+**先决条件：** 服务器可以正常访问 github.com
+
+编写 `docker-compose.yml`
+
+```bash
 vim docker-compose.yml
 ```
 
@@ -45,45 +57,112 @@ services:
       image: mongo:latest
       container_name: "mongo"
       network_mode: "host"
-      ports: 
-        - "27017:27017"
+      # ports: 
+      #   - "27017:27017"
       volumes: 
-        - ~/data:/data/db
+        - /root/zstu-api/data:/data/db
       restart: always
 
     zstu-api: 
       depends_on: 
         - mongo
       tty: true
-      image: chen2438/zstu-api:1.1
+      image: chen2438/zstu-api:latest
       container_name: "zstu-api"
       network_mode: "host"
-      ports: 
-        - "80:80"
-      privileged: true
+      # ports: 
+      #   - "80:80"
+      command:
+        - sh
+        - -c 
+        - |
+          rm -rf /Zstu-Api
+          git clone https://github.com/Neutron-Bomb/Zstu-Api
+          cd Zstu-Api && npm install && tsc
+          node out/app.js
 ```
 
 输入 `:wq` 退出
 
-开始后台构建
+开始后台启动并运行
 
 ```bash
 docker-compose up -d
 ```
 
-构建成功如图所示
+启动成功如图所示
 
 ![image-20221006133659332](http://nme-200t.oss-cn-hangzhou.aliyuncs.com/notes/2022-10-06-053659.png)
 
 确认容器状态
 
-[待更正: 疑似PORTS配置被忽略, 由于network_mode]
+```bash
+docker ps
+```
+
+![image-20221006174610261](https://picgo-1303840613.cos.ap-shanghai.myqcloud.com/image-20221006174610261.png)
+
+如果 STATUS 是 Up 表示启动成功
+
+启动成功后，在可以访问 github 的情况下，等待约 45 秒即完成部署
+
+运行服务时请确保服务器 80 端口已被放行
+
+#### 手动部署
+
+**注意：**Zstu-Api 版本可能过时，请参考自动部署的 `command` 命令自行升级
+
+编写 `docker-compose.yml`
+
+```bash
+vim docker-compose.yml
+```
+
+粘贴以下内容
+
+```yaml
+version: '3.3'
+services: 
+    mongo: 
+      image: mongo:latest
+      container_name: "mongo"
+      network_mode: "host"
+      # ports: 
+      #   - "27017:27017"
+      volumes: 
+        - /root/zstu-api/data:/data/db
+      restart: always
+
+    zstu-api: 
+      depends_on: 
+        - mongo
+      tty: true
+      image: chen2438/zstu-api:latest
+      container_name: "zstu-api"
+      network_mode: "host"
+      # ports: 
+      #   - "80:80"
+```
+
+输入 `:wq` 退出
+
+开始后台启动并运行
+
+```bash
+docker-compose up -d
+```
+
+启动成功如图所示
+
+![image-20221006133659332](http://nme-200t.oss-cn-hangzhou.aliyuncs.com/notes/2022-10-06-053659.png)
+
+确认容器状态
 
 ```bash
 docker ps
 ```
 
-![image-20221006142343916](http://nme-200t.oss-cn-hangzhou.aliyuncs.com/notes/2022-10-06-062344.png)
+![image-20221006174610261](https://picgo-1303840613.cos.ap-shanghai.myqcloud.com/image-20221006174610261.png)
 
 如果 STATUS 是 Up 表示启动成功
 
@@ -113,8 +192,8 @@ Ctrl + P 然后 Ctrl + Q 挂起容器, 服务将持续运行
 
 ### 待解决
 
-- 更换linux发行版, 减小镜像大小
-- 构建时更新 git 仓库
-- latest 镜像版本号
-- [安全性]取消 zstu-api 特权模式
-- [安全性]使用自定义网桥, 取消共享宿主机网络
+- [not ok]更换linux发行版, 减小镜像大小
+- [ok]构建时更新 git 仓库
+- [ok]latest 镜像版本号
+- [not ok] [安全性]取消 zstu-api 特权模式
+- [not ok] [安全性]使用自定义网桥, 取消共享宿主机网络
